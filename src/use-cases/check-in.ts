@@ -1,9 +1,10 @@
-import { CheckInsRespository } from "@/repositories/check-ins-repository";
+import { CheckInRespository } from "@/repositories/check-ins-repository";
 import { CheckIn } from "@prisma/client";
-import { CheckInTwiceOnDayError } from "./errors/check-in-twice-on-day.error";
+import { MaxCheckInError } from "./errors/max-check-in-error";
 import { GymRepository } from "@/repositories/gym-repository";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates";
+import { MaxDistanceError } from "./errors/max-distance-error";
 
 interface CheckInUseCaseRequest {
   userId: string;
@@ -18,7 +19,7 @@ interface CheckInUseCaseResponse {
 
 export class CheckInUseCase {
   constructor(
-    private checkInsRepository: CheckInsRespository,
+    private checkInsRepository: CheckInRespository,
     private gymRepository: GymRepository,
   ) {}
 
@@ -45,7 +46,7 @@ export class CheckInUseCase {
     const MAX_DISTANCE_IN_KILOMETERS = 0.1;
 
     if (distance > MAX_DISTANCE_IN_KILOMETERS) {
-      throw new Error();
+      throw new MaxDistanceError();
     }
 
     const checkInOnSameDay = await this.checkInsRepository.findByuserIdOnDate({
@@ -54,7 +55,7 @@ export class CheckInUseCase {
     });
 
     if (checkInOnSameDay) {
-      throw new CheckInTwiceOnDayError();
+      throw new MaxCheckInError();
     }
 
     const checkIn = await this.checkInsRepository.create({
