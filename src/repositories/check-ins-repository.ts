@@ -6,4 +6,5 @@ export interface CheckInRespository {
     userId: string;
     date: Date;
   }): Promise<CheckIn | null>;
+  findManyByUserId(data: { userId: string; page: number }): Promise<CheckIn[]>;
 }
