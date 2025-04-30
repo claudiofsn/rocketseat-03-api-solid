@@ -19,7 +19,7 @@ export class InMemoryCheckInRepository implements CheckInRespository {
     return checkIn;
   }
 
-  async findByuserIdOnDate(data: {
+  async findByUserIdOnDate(data: {
     userId: string;
     date: Date;
   }): Promise<CheckIn | null> {
