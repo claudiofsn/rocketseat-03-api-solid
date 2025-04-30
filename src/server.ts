@@ -6,4 +6,4 @@ app
     host: "0.0.0.0",
     port: env.PORT,
   })
-  .then(() => console.log("🚀 HTTP Server running!"));
+  .then(() => console.log("🚀 HTTP Server running!!"));
