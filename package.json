@@ -12,7 +12,6 @@
     "test:e2e": "vitest run --project e2e",
     "test:watch": "vitest --project unit",
     "test:watch:e2e": "vitest --project e2e",
-
     "test:coverage": "vitest run --coverage"
   },
   "keywords": [],

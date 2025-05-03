@@ -21,7 +21,7 @@ export async function authenticate(
       email,
       password,
     });
-    console.log("bati aqui");
+
     const token = await reply.jwtSign(
       {},
       {
